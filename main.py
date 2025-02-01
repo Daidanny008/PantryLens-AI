@@ -1,8 +1,8 @@
-from shopping_list_app import ShoppingListApp
+import ShoppingListApp
 
 # Initialize the app with Google Gemini (Vertex AI) integration
 app = ShoppingListApp(
-    "path/to/credentials.json", 
+    "client_secret_1068636668945-a24b31pr1v8p7iss82hd371kn4n9q966.apps.googleusercontent.com.json", 
     "your_google_sheet_id", 
     google_project_id="your_project_id", 
     endpoint_id="your_endpoint_id"
