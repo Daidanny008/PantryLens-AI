@@ -1,21 +1,25 @@
-import openai
+from google.cloud import aiplatform
 
 class ShoppingListGenerator:
-    def __init__(self, gemini_api_key):
-        """Initialize Gemini API for generating shopping lists."""
-        openai.api_key = gemini_api_key
+    def __init__(self, google_project_id, endpoint_id):
+        """Initialize Google Gemini (via Vertex AI) for generating shopping lists."""
+        aiplatform.init(project=google_project_id, location="us-central1")
+        self.endpoint = aiplatform.Endpoint(endpoint_id=endpoint_id)
 
     def generate_shopping_list(self, dish_name, inventory):
-        """Uses Gemini API to suggest missing ingredients."""
-        prompt = f"""
-        Given the dish "{dish_name}", list the ingredients needed. 
-        Compare with the following inventory and suggest missing items:
-        {inventory}
-        """
+        """Uses Google Gemini API to suggest missing ingredients."""
+        try:
+            prompt = f"""
+            Given the dish "{dish_name}", list the ingredients needed. 
+            Compare with the following inventory and suggest missing items:
+            {inventory}
+            """
 
-        response = openai.ChatCompletion.create(
-            model="gpt-4",  # Replace with Gemini model if needed
-            messages=[{"role": "user", "content": prompt}]
-        )
+            # Use the Google Vertex AI endpoint (Gemini model)
+            response = self.endpoint.predict(instances=[{"content": prompt}])
 
-        return response["choices"][0]["message"]["content"]
+            # Extract the response (this depends on the API response format)
+            return response.predictions[0]  # Adjust based on actual response structure
+        except Exception as e:
+            print(f"Error generating shopping list with Google Gemini: {e}")
+            return ""
