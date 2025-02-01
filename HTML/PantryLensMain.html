@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PantryLense AI</title>
+    <title>PantryLens AI</title>
     <link rel="stylesheet" href="../CSS/Main.css">
-    <link rel="JavaScript" href="../JavaScript/Main.js">
 </head>
 <body>
     <div class="menu" id="myMenu">
@@ -13,20 +12,24 @@
         <a href="Ingredients.html" class="ingredientsBtn">Ingredients</a>
     </div>
 
-    <img onclick="openMenu()" class="openMenuBtn" src="../Pictures/menu-icon-24.png"></img>
+    <span style="font-size:30px;cursor:pointer" onclick="openMenu()"><img class="openMenuBtn" src="../Pictures/menu-icon-24.png"></span>
 
     <div class="main">
         <div class="titleContainer">
-            <h1 class="title">PantryLense AI</h1>
+            <h1 class="title">PantryLens AI</h1>
         </div>
         
         <div class="searchContainer">
             <input type="text" placeholder="Search for an ingredient" class="searchBar">
-            <button type="submit"></button>
+            <button class="searchButton" type="submit">
+                <img class="searchIcon" src="../Pictures/768px-Magnifying_glass_icon.png">
+            </button>
+             
         </div>
         <div class="uploadContainer">
             <input type="file" id="file" accept="image/*" class="uploadButton">
         </div>
     </div>
+    <script src="../JavaScript/Main.js"></script>
 </body>
 </html>

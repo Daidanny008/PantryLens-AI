@@ -5,38 +5,6 @@ body{
     padding: 0;
 }
 
-/* Title */
-.title {
-    font-size: 2em;
-    font-weight: 700;
-    color: #333;
-    text-align: center;
-    margin-top: 20px;
-}
-
-/* Search Bar */
-.searchContainer {
-    text-align: center;
-}
-
-/* Submit Button */
-.searchButton {
-    height: 22px;
-    width: 30px;
-    cursor: pointer;
-}
-
-.searchIcon {
-    height: 60%;
-}
-
-/* Upload Button */
-.uploadContainer {
-    text-align: center;
-    margin: 0;
-    padding: 0;
-}
-
 .openMenuBtn {
     font-size: 30px;
     cursor: pointer;
@@ -88,4 +56,3 @@ body{
     .menu {padding-top: 15px;}
     .menu a {font-size: 18px;}
 }
-  
