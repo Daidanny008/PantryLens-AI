@@ -27,3 +27,4 @@ class VisionProcessor:
 
         extracted_text = response.text_annotations[0].description if response.text_annotations else ''
         return extracted_text
+
