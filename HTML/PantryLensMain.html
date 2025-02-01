@@ -4,28 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PantryLense AI</title>
-    <link rel="stylesheet" href="../CSS/PantryLensMain.css">
+    <link rel="stylesheet" href="../CSS/Main.css">
+    <link rel="JavaScript" href="../JavaScript/Main.js">
 </head>
 <body>
+    <div class="menu" id="myMenu">
+        <a href="javascript:void(0)" class="closeMenuBtn" onclick="closeMenu()">&times;</a>
+        <a href="Ingredients.html" class="ingredientsBtn">Ingredients</a>
+    </div>
+
+    <img onclick="openMenu()" class="openMenuBtn" src="../Pictures/menu-icon-24.png"></img>
+
     <div class="main">
         <div class="titleContainer">
             <h1 class="title">PantryLense AI</h1>
         </div>
         
-        <div class="search-container">
+        <div class="searchContainer">
             <input type="text" placeholder="Search for an ingredient" class="searchBar">
             <button type="submit"></button>
         </div>
-        <div class="upload-container">
+        <div class="uploadContainer">
             <input type="file" id="file" accept="image/*" class="uploadButton">
         </div>
     </div>
-
-    <div class="menu" id="menu">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="Ingredients.html" class="ingredientsbtn">Ingredients</a>
-    </div>
-
-    <span onclick="openNav()">open</span>
 </body>
 </html>

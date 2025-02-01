@@ -5,7 +5,8 @@ body{
     padding: 0;
 }
 
-.title{
+/* Title */
+.title {
     font-size: 2em;
     font-weight: 700;
     color: #333;
@@ -13,7 +14,21 @@ body{
     margin-top: 20px;
 }
 
-.sidenav {
+/* Search Bar */
+.searchContainer {
+    text-align: center;
+}
+
+.openMenuBtn {
+    font-size: 30px;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border: 5px solid #333;
+    outline: none;
+}
+
+.menu {
     height: 100%;
     width: 0;
     position: fixed;
@@ -23,4 +38,36 @@ body{
     overflow-x: hidden;
     padding-top: 60px;
     transition: 0.5s;
-  }
+}
+
+.menu a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    color: #f1f1f1;
+}
+
+.menu .closeMenuBtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+}
+
+@media screen and (max-height: 450px) {
+    .menu {padding-top: 15px;}
+    .menu a {font-size: 18px;}
+}
+  
