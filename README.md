@@ -1,1 +1,1 @@
-# PantryLens - Macathon 2025
+# PantryLens - Mac-a-thon 2025
