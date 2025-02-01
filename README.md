@@ -1,1 +1,1 @@
-# SugarLens ai - Mac-a-thon 2025
+# PantryLens ai - Mac-a-thon 2025
