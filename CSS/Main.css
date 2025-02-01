@@ -15,7 +15,7 @@ body{
 }
 
 /* Search Bar */
-.searchContainer {
+.searchAndUploadContainer {
     text-align: center;
 }
 
@@ -31,11 +31,6 @@ body{
 }
 
 /* Upload Button */
-.uploadContainer {
-    text-align: center;
-    margin: 0;
-    padding: 0;
-}
 
 .openMenuBtn {
     font-size: 30px;

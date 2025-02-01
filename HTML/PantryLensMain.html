@@ -9,7 +9,7 @@
 <body>
     <div class="menu" id="myMenu">
         <a href="javascript:void(0)" class="closeMenuBtn" onclick="closeMenu()">&times;</a>
-        <a href="Ingredients.html" class="ingredientsBtn">Ingredients</a>
+        <a href="Ingredients.html" class="ingredientsBtn">Inventory</a>
     </div>
 
     <span style="font-size:30px;cursor:pointer" onclick="openMenu()"><img class="openMenuBtn" src="../Pictures/menu-icon-24.png"></span>
@@ -19,14 +19,11 @@
             <h1 class="title">PantryLens AI</h1>
         </div>
         
-        <div class="searchContainer">
+        <div class="searchAndUploadContainer">
             <input type="text" placeholder="Search for an ingredient" class="searchBar">
             <button class="searchButton" type="submit">
                 <img class="searchIcon" src="../Pictures/768px-Magnifying_glass_icon.png">
             </button>
-             
-        </div>
-        <div class="uploadContainer">
             <input type="file" id="file" accept="image/*" class="uploadButton">
         </div>
     </div>

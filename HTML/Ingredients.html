@@ -23,17 +23,24 @@
             </button>
         </div>
 
-        <table id="ingredientsTable">
-            <thead>
-                <tr>
-                    <th data-sort="name">Ingredient</th>
-                    <th data-sort="quantity">Quantity</th>
-                    <th data-sort="expiration">Expiratigion</th>
-                    <th>Used</th>
-                </tr>
-            </thead>
-            <tbody id="ingredientsTableBody"></tbody>
-        </table>
+        <div class="tableContainer">
+            <table class="ingredientsTable">
+                <thead>
+                    <tr>
+                        <th>Ingredient</th>
+                        <th class="sortable" data-sort="quantity">
+                            Quantity <span class="sortIcon">↕</span>
+                        </th>
+                        <th class="sortable" data-sort="expiration">
+                            Expiration <span class="sortIcon">↕</span>
+                        </th>
+                        <th>Used</th>
+                    </tr>
+                </thead>
+                <tbody id="ingredientsTableBody">
+                </tbody>
+            </table>
+        </div>
     </div>
     <script src="../JavaScript/Main.js"></script>
 </body>
