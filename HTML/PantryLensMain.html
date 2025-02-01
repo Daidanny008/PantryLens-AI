@@ -7,16 +7,25 @@
     <link rel="stylesheet" href="../CSS/PantryLensMain.css">
 </head>
 <body>
-    <div class="titleContainer">
-        <h1 class="title">PantryLense AI</h1>
+    <div class="main">
+        <div class="titleContainer">
+            <h1 class="title">PantryLense AI</h1>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" placeholder="Search for an ingredient" class="searchBar">
+            <button type="submit"></button>
+        </div>
+        <div class="upload-container">
+            <input type="file" id="file" accept="image/*" class="uploadButton">
+        </div>
     </div>
-    
-    <div class="search-container">
-        <input type="text" placeholder="Search for an ingredient" class="searchBar">
-        <button type="submit"></button>
+
+    <div class="menu" id="menu">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="Ingredients.html" class="ingredientsbtn">Ingredients</a>
     </div>
-    <div class="upload-container">
-        <input type="file" id="file" accept="image/*" class="uploadButton">
-    </div>
+
+    <span onclick="openNav()">open</span>
 </body>
 </html>
