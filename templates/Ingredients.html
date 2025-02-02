@@ -48,25 +48,42 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const ingredients = JSON.parse(localStorage.getItem('ingredients')) || [];
-            const ingredientsTableBody = document.getElementById('ingredientsTable').querySelector('tbody');
-            ingredientsTableBody.innerHTML = ''; // Clear the table body
-            ingredients.forEach(ingredient => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${ingredient.name}</td>
-                    <td>${ingredient.quantity}</td>
-                    <td>${ingredient.expiration}</td>
-                    <td>${ingredient.used ? 'Yes' : 'No'}</td>
-                    <td>
-                        <input type="number" placeholder="Used quantity" id="usedQuantity-${ingredient.name}">
-                        <button onclick="useIngredient('${ingredient.name}', document.getElementById('usedQuantity-${ingredient.name}').value)">Use</button>
-                        <button onclick="deleteIngredient('${ingredient.name}')">Delete</button>
-                    </td>
-                `;
-                ingredientsTableBody.appendChild(row);
-            });
+            fetch('{{ url_for("get_groceries") }}')
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Fetched data:", data);  // Debugging information
+                    const ingredientsTableBody = document.getElementById('ingredientsTable').querySelector('tbody');
+                    ingredientsTableBody.innerHTML = ''; // Clear the table body
+                    data.forEach(ingredient => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${ingredient.name}</td>
+                            <td>${ingredient.quantity}</td>
+                            <td>${ingredient.expiration}</td>
+                            <td><input type="checkbox" class="usedCheckbox"></td>
+                            <td><button onclick="deleteIngredient(this)">Delete</button></td>
+                        `;
+                        ingredientsTableBody.appendChild(row);
+                    });
+                })
+                .catch(error => {
+                    console.error("Error fetching data:", error);  // Debugging information
+                });
         });
+
+        function deleteIngredient(button) {
+            const row = button.parentElement.parentElement;
+            row.remove();
+        }
+
+        function deleteUsedIngredients() {
+            const checkboxes = document.querySelectorAll('.usedCheckbox');
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    checkbox.parentElement.parentElement.remove();
+                }
+            });
+        }
     </script>
     <script src="{{ url_for('static', filename='JavaScript/Main.js')}}"></script>
 </body>

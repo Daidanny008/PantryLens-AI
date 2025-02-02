@@ -64,13 +64,13 @@ def call_gemini(prompt):
         return f"Error {response.status_code}: {response.text}"
 
 def getTable(user_message):
-    prompt = f"given this extracted text from an image of a receipt, what did I buy, and what are their price and quantity each? Also estimate the expiry date of each item by their names, space the table properly please {user_message}"
+    prompt = f"given this extracted text from an image of a receipt, what did I buy, and what are their price and quantity each? Also estimate the expiry date of each item by their names as a best before date (YYYY/MM/DD) assuming its purchased today's date, space the table properly please {user_message}"
     return call_gemini(prompt)
 
 def getGroceries():
     return groceries
 
-def get_groceries_from_image(image_path):
+""" def get_groceries_from_image(image_path):
     if image_path is None:
         return "No image uploaded yet."
     
@@ -86,9 +86,54 @@ def get_groceries_from_image(image_path):
     
     groceries = texts[0].description
     groceries = getTable(groceries)
-    return groceries
+    return groceries """
 
-# Example usage
+def get_groceries_from_image(image_path):
+    if image_path is None:
+        return "", []
+
+    with open(image_path, 'rb') as image_file:
+        content = image_file.read()
+
+    image = vision.Image(content=content)
+    response = client.text_detection(image=image)
+    texts = response.text_annotations
+
+    if not texts:
+        print("No text detected in the image.")
+        return "", []
+
+    groceries_text = texts[0].description
+    groceries_text = getTable(groceries_text)
+    print("Extracted text:", groceries_text)  # Debugging information
+
+    # Extract the table from the text
+    table_start = groceries_text.find("| Item")
+    table_end = groceries_text.find("**Note:**")
+    if table_start == -1 or table_end == -1:
+        print("Table not found in the text.")
+        return groceries_text, []
+
+    table_text = groceries_text[table_start:table_end].strip()
+    print("Extracted table:", table_text)  # Debugging information
+
+    groceries = []
+    lines = table_text.split('\n')
+    for line in lines[2:]:  # Skip the first two lines (headings and separator)
+        parts = line.split('|')
+        if len(parts) >= 5:
+            item = parts[1].strip()
+            quantity = parts[2].strip()
+            estimated_expiry_date = parts[5].strip()
+            groceries.append({
+                'name': item,
+                'quantity': quantity,
+                'expiration': estimated_expiry_date
+            })
+    print("Parsed groceries:", groceries)  # Debugging information
+    return groceries_text, groceries
+
+
 image_path = "image/receipt.jpeg"  # Replace with your image path
 groceries = process_image(image_path)
 groceries = getTable(groceries)
