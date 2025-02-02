@@ -28,7 +28,9 @@
                 <button type="submit">Add Ingredient</button>
             </form>
             <form action="{{ url_for('upload_image') }}" method="post" enctype="multipart/form-data">
-                <input type="file" name="file" id="file" accept="image/*" class="uploadButton" onchange="this.form.submit()">
+                <!-- Hidden file input -->
+                <input type="file" name="file" id="file" accept="image/*" class="uploadButton" onchange="this.form.submit()" style="display: none;">
+                <!-- Label styled as a button -->
                 <label for="file" class="uploadButton">Upload Receipt</label>
             </form>
         </div>
