@@ -20,10 +20,13 @@
         </div>
         
         <div class="searchAndUploadContainer">
-            <input type="text" placeholder="Search for an ingredient" class="searchBar">
-            <button class="searchButton" type="submit">
-                <img class="searchIcon" src="{{ url_for('static', filename='Pictures/768px-Magnifying_glass_icon.png')}}">
-            </button>
+            <h2>Add Ingredient</h2>
+            <form id="addIngredientForm">
+                <input type="text" id="ingredientName" placeholder="Name" required>
+                <input type="text" id="ingredientQuantity" placeholder="Quantity (e.g., 100 g)" required>
+                <input type="text" id="ingredientExpiration" placeholder="Expiration Date (MM/DD/YYYY)" required>
+                <button type="submit">Add Ingredient</button>
+            </form>
             <form action="{{ url_for('upload_image') }}" method="post" enctype="multipart/form-data">
                 <input type="file" name="file" id="file" accept="image/*" class="uploadButton" onchange="this.form.submit()">
                 <label for="file" class="uploadButton">Upload Receipt</label>
@@ -33,16 +36,6 @@
         <div class="groceriesContainer">
             <h2>Groceries List</h2>
             <pre>{{ groceries.replace('\n', '<br>')| safe }}</pre>
-        </div>
-
-        <div class="addIngredientContainer">
-            <h2>Add Ingredient</h2>
-            <form id="addIngredientForm">
-                <input type="text" id="ingredientName" placeholder="Name" required>
-                <input type="text" id="ingredientQuantity" placeholder="Quantity (e.g., 100 g)" required>
-                <input type="text" id="ingredientExpiration" placeholder="Expiration Date (MM/DD/YYYY)" required>
-                <button type="submit">Add Ingredient</button>
-            </form>
         </div>
     </div>
 
