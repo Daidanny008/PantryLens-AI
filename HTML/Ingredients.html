@@ -26,24 +26,47 @@
         </main>
 
         <div class="tableContainer">
-            <table class="ingredientsTable">
+            <table class="ingredientsTable" id="ingredientsTable">
                 <thead>
                     <tr>
-                        <th>Ingredient</th>
-                        <th class="sortable" data-sort="quantity">
-                            Quantity <span class="sortIcon">↕</span>
-                        </th>
-                        <th class="sortable" data-sort="expiration">
-                            Expiration <span class="sortIcon">↕</span>
-                        </th>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Expiration</th>
                         <th>Used</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody id="ingredientsTableBody">
+                <tbody>
+                    <!-- Ingredients will be dynamically added here -->
                 </tbody>
             </table>
         </div>
+
+        <button onclick="deleteUsedIngredients()">Delete Used Ingredients</button>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ingredients = JSON.parse(localStorage.getItem('ingredients')) || [];
+            const ingredientsTableBody = document.getElementById('ingredientsTable').querySelector('tbody');
+            ingredientsTableBody.innerHTML = ''; // Clear the table body
+            ingredients.forEach(ingredient => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${ingredient.name}</td>
+                    <td>${ingredient.quantity}</td>
+                    <td>${ingredient.expiration}</td>
+                    <td>${ingredient.used ? 'Yes' : 'No'}</td>
+                    <td>
+                        <input type="number" placeholder="Used quantity" id="usedQuantity-${ingredient.name}">
+                        <button onclick="useIngredient('${ingredient.name}', document.getElementById('usedQuantity-${ingredient.name}').value)">Use</button>
+                        <button onclick="deleteIngredient('${ingredient.name}')">Delete</button>
+                    </td>
+                `;
+                ingredientsTableBody.appendChild(row);
+            });
+        });
+    </script>
     <script src="../JavaScript/Main.js"></script>
 </body>
 </html>
