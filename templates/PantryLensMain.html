@@ -27,6 +27,11 @@
             <input type="file" id="file" accept="image/*" class="uploadButton">
         </div>
 
+        <div class="groceriesContainer">
+            <h2>Groceries List</h2>
+            <pre>{{ groceries.replace('\n', '<br>')|safe }}</pre>
+        </div>
+
         <div class="addIngredientContainer">
             <h2>Add Ingredient</h2>
             <form id="addIngredientForm">

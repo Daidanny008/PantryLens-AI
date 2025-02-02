@@ -84,3 +84,11 @@ body{
     .menu a {font-size: 18px;}
 }
   
+/* Groceries TABLE */
+.groceriesContainer pre {
+    white-space: pre-wrap; /* Wraps the text */
+    word-wrap: break-word; /* Breaks long words */
+    overflow-wrap: break-word; /* Ensures long words break */
+    max-width: 100%; /* Ensures the content doesn't overflow the container */
+    overflow-x: auto; /* Adds horizontal scroll if necessary */
+}
