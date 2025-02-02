@@ -58,7 +58,6 @@ def call_gemini(prompt):
         return f"Error {response.status_code}: {response.text}"
 
 def getTable(user_message):
-    print("prompted")
     prompt = f"given this extracted text from an image of a receipt, what did I buy, and what are their price and quantity each? Also estimate the expiry date of each item by their names, space the table properly please {user_message}"
     return call_gemini(prompt)
 

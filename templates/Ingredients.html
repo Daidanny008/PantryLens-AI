@@ -3,27 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory</title>
-    <link rel="stylesheet" href="../CSS/Ingredients.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/Ingredients.css') }}">
 </head>
 <body>
     <div class="menu" id="myMenu">
         <a href="javascript:void(0)" class="closeMenuBtn" onclick="closeMenu()">&times;</a>
-        <a href="PantryLensMain.html" class="mainBtn">Main</a>
+        <a href="{{ url_for('index') }}" class="mainBtn">Main</a>
     </div>
     
-    <span style="font-size:30px;cursor:pointer" onclick="openMenu()"><img class="openMenuBtn" src="../Pictures/menu-icon-24.png"></span>
+    <span style="font-size:30px;cursor:pointer" onclick="openMenu()"><img class="openMenuBtn" src="{{ url_for('static', filename='Pictures/menu-icon-24.png')}}"></span>
 
-    <div class="main" id="main">
-        <main class="mainContent">
-            <div class="pageHeader">
-                <h1>Ingredients</h1>
-                <div class="searchContainer">
-                    <input type="search" placeholder="Search ingredients..." class="searchInput">
-                    <button class="searchButton">🔍</button>
-                </div>
-            </div>
-        </main>
+    <div class="main">
+        <h1>Ingredients</h1>
+        <div class="searchContainer">
+            <input type="text" placeholder="Search for an ingredient" class="searchBar">
+            <button class="searchButton" type="submit">
+                <img class="searchIcon" src="{{ url_for('static', filename='Pictures/768px-Magnifying_glass_icon.png')}}">
+            </button>
+        </div>
 
         <div class="tableContainer">
             <table class="ingredientsTable">
@@ -44,6 +42,6 @@
             </table>
         </div>
     </div>
-    <script src="../JavaScript/Main.js"></script>
+    <script src="{{ url_for('static', filename='JavaScript/Main.js')}}"></script>
 </body>
 </html>
