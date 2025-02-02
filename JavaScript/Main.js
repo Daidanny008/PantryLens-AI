@@ -1,33 +1,95 @@
-const ingredients = [
-  {
-      id: '1',
-      name: 'sdasdas',
-      quantity: '54 g',
-      expiration: 'MM/DD/YYYY',
+const ingredients = JSON.parse(localStorage.getItem('ingredients')) || [];
+
+function saveIngredients() {
+  localStorage.setItem('ingredients', JSON.stringify(ingredients));
+}
+
+function addIngredient(id, name, quantity, expiration) {
+  const existingIngredient = ingredients.find(ingredient => ingredient.name === name);
+  if (existingIngredient) {
+    const currentQuantity = parseFloat(existingIngredient.quantity);
+    const additionalQuantity = parseFloat(quantity);
+    if (!isNaN(currentQuantity) && !isNaN(additionalQuantity)) {
+      existingIngredient.quantity = `${currentQuantity + additionalQuantity} g`;
+    }
+  } else {
+    ingredients.push({
+      id: id,
+      name: name,
+      quantity: quantity,
+      expiration: expiration,
       used: false
-  },
-  {
-      id: '2',
-      name: 'sdasad',
-      quantity: '34 g',
-      expiration: '',
-      used: false
-  },
-  {
-      id: '3',
-      name: 'sdas',
-      quantity: '',
-      expiration: '',
-      used: false
-  },
-  {
-      id: '4',
-      name: 'dsaas',
-      quantity: '',
-      expiration: '',
-      used: false
+    });
   }
-];
+  saveIngredients();
+  renderIngredients();
+}
+
+document.getElementById('addIngredientForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const name = document.getElementById('ingredientName').value;
+  const quantity = document.getElementById('ingredientQuantity').value;
+  const expiration = document.getElementById('ingredientExpiration').value;
+  addIngredient(Date.now().toString(), name, quantity, expiration);
+  alert('Ingredient added successfully!');
+  document.getElementById('addIngredientForm').reset();
+});
+
+function useIngredient(name, usedQuantity) {
+  const ingredient = ingredients.find(i => i.name === name);
+  if (ingredient) {
+    const currentQuantity = parseFloat(ingredient.quantity);
+    const usedQty = parseFloat(usedQuantity);
+    if (!isNaN(currentQuantity) && !isNaN(usedQty)) {
+      ingredient.quantity = `${currentQuantity - usedQty} g`;
+      ingredient.used = true;
+    }
+  }
+  saveIngredients();
+  renderIngredients();
+}
+
+function deleteIngredient(name) {
+  const index = ingredients.findIndex(i => i.name === name);
+  if (index !== -1) {
+    ingredients.splice(index, 1);
+  }
+  saveIngredients();
+  renderIngredients();
+}
+
+function deleteUsedIngredients() {
+  for (let i = ingredients.length - 1; i >= 0; i--) {
+    if (ingredients[i].used) {
+      ingredients.splice(i, 1);
+    }
+  }
+  saveIngredients();
+  renderIngredients();
+}
+
+function renderIngredients() {
+  const ingredientsTableBody = document.getElementById('ingredientsTable').querySelector('tbody');
+  ingredientsTableBody.innerHTML = ''; // Clear the table body
+  ingredients.forEach(ingredient => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${ingredient.name}</td>
+      <td>${ingredient.quantity}</td>
+      <td>${ingredient.expiration}</td>
+      <td>${ingredient.used ? 'Yes' : 'No'}</td>
+      <td>
+        <input type="number" placeholder="Used quantity" id="usedQuantity-${ingredient.name}">
+        <button onclick="useIngredient('${ingredient.name}', document.getElementById('usedQuantity-${ingredient.name}').value)">Use</button>
+        <button onclick="deleteIngredient('${ingredient.name}')">Delete</button>
+      </td>
+    `;
+    ingredientsTableBody.appendChild(row);
+  });
+}
+
+// Initial render
+renderIngredients();
 
 // Sort state
 let currentSort = {
