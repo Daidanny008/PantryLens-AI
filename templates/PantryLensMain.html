@@ -24,7 +24,8 @@
             <button class="searchButton" type="submit">
                 <img class="searchIcon" src="{{ url_for('static', filename='Pictures/768px-Magnifying_glass_icon.png')}}">
             </button>
-            <input type="file" id="file" accept="image/*" class="uploadButton">
+            <input type="file" id="file" accept="image/*" style="display: none;">
+            <label for="file" class="uploadButton">Upload Receipt</label>
         </div>
 
         <div class="groceriesContainer">
