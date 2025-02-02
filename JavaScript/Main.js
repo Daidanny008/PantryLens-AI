@@ -1,3 +1,34 @@
+const ingredients = [
+  {
+      id: '1',
+      name: 'sdasdas',
+      quantity: '54 g',
+      expiration: 'MM/DD/YYYY',
+      used: false
+  },
+  {
+      id: '2',
+      name: 'sdasad',
+      quantity: '34 g',
+      expiration: '',
+      used: false
+  },
+  {
+      id: '3',
+      name: 'sdas',
+      quantity: '',
+      expiration: '',
+      used: false
+  },
+  {
+      id: '4',
+      name: 'dsaas',
+      quantity: '',
+      expiration: '',
+      used: false
+  }
+];
+
 // Sort state
 let currentSort = {
   column: null,
