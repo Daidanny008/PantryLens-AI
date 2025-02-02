@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PantryLens AI</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/Main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/Main.css')}}">
 </head>
 <body>
     <div class="menu" id="myMenu">
@@ -12,9 +12,9 @@
         <a href="{{ url_for('inventory') }}" class="ingredientsBtn">Inventory</a>
     </div>
 
-    <span style="font-size:30px;cursor:pointer" onclick="openMenu()"><img class="openMenuBtn" src="{{ url_for ('static', filename='Pictures/menu-icon-24.png') }}"></span>
+    <span style="font-size:30px;cursor:pointer" onclick="openMenu()"><img class="openMenuBtn" src="{{ url_for('static', filename='Pictures/menu-icon-24.png')}}"></span>
 
-    <div class="main">
+    <div class="main" id="main">
         <div class="titleContainer">
             <h1 class="title">PantryLens AI</h1>
         </div>
@@ -22,11 +22,22 @@
         <div class="searchAndUploadContainer">
             <input type="text" placeholder="Search for an ingredient" class="searchBar">
             <button class="searchButton" type="submit">
-                <img class="searchIcon" src="{{ url_for ('static', filename='Pictures/768px-Magnifying_glass_icon.png') }}">
+                <img class="searchIcon" src="../Pictures/768px-Magnifying_glass_icon.png">
             </button>
             <input type="file" id="file" accept="image/*" class="uploadButton">
         </div>
+
+        <div class="addIngredientContainer">
+            <h2>Add Ingredient</h2>
+            <form id="addIngredientForm">
+                <input type="text" id="ingredientName" placeholder="Name" required>
+                <input type="text" id="ingredientQuantity" placeholder="Quantity (e.g., 100 g)" required>
+                <input type="text" id="ingredientExpiration" placeholder="Expiration Date (MM/DD/YYYY)" required>
+                <button type="submit">Add Ingredient</button>
+            </form>
+        </div>
     </div>
-    <script src="{{ url_for('static', filename='JavaScript/Main.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='JavaScript/Main.js')}}"></script>
 </body>
 </html>

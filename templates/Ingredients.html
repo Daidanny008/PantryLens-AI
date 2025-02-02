@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/Ingredients.css') }}">
+    <title>Inventory</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/Ingredients.css')}}">
 </head>
 <body>
     <div class="menu" id="myMenu">
@@ -14,34 +14,59 @@
     
     <span style="font-size:30px;cursor:pointer" onclick="openMenu()"><img class="openMenuBtn" src="{{ url_for('static', filename='Pictures/menu-icon-24.png')}}"></span>
 
-    <div class="main">
-        <h1>Ingredients</h1>
-        <div class="searchContainer">
-            <input type="text" placeholder="Search for an ingredient" class="searchBar">
-            <button class="searchButton" type="submit">
-                <img class="searchIcon" src="{{ url_for('static', filename='Pictures/768px-Magnifying_glass_icon.png')}}">
-            </button>
-        </div>
+    <div class="main" id="main">
+        <main class="mainContent">
+            <div class="pageHeader">
+                <h1>Ingredients</h1>
+                <div class="searchContainer">
+                    <input type="search" placeholder="Search ingredients..." class="searchInput">
+                    <button class="searchButton">🔍</button>
+                </div>
+            </div>
+        </main>
 
         <div class="tableContainer">
-            <table class="ingredientsTable">
+            <table class="ingredientsTable" id="ingredientsTable">
                 <thead>
                     <tr>
-                        <th>Ingredient</th>
-                        <th class="sortable" data-sort="quantity">
-                            Quantity <span class="sortIcon">↕</span>
-                        </th>
-                        <th class="sortable" data-sort="expiration">
-                            Expiration <span class="sortIcon">↕</span>
-                        </th>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Expiration</th>
                         <th>Used</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody id="ingredientsTableBody">
+                <tbody>
+                    <!-- Ingredients will be dynamically added here -->
                 </tbody>
             </table>
         </div>
+
+        <button onclick="deleteUsedIngredients()">Delete Used Ingredients</button>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ingredients = JSON.parse(localStorage.getItem('ingredients')) || [];
+            const ingredientsTableBody = document.getElementById('ingredientsTable').querySelector('tbody');
+            ingredientsTableBody.innerHTML = ''; // Clear the table body
+            ingredients.forEach(ingredient => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${ingredient.name}</td>
+                    <td>${ingredient.quantity}</td>
+                    <td>${ingredient.expiration}</td>
+                    <td>${ingredient.used ? 'Yes' : 'No'}</td>
+                    <td>
+                        <input type="number" placeholder="Used quantity" id="usedQuantity-${ingredient.name}">
+                        <button onclick="useIngredient('${ingredient.name}', document.getElementById('usedQuantity-${ingredient.name}').value)">Use</button>
+                        <button onclick="deleteIngredient('${ingredient.name}')">Delete</button>
+                    </td>
+                `;
+                ingredientsTableBody.appendChild(row);
+            });
+        });
+    </script>
     <script src="{{ url_for('static', filename='JavaScript/Main.js')}}"></script>
 </body>
 </html>
